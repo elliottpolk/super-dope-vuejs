@@ -74,7 +74,9 @@ $ npm install --save-dev url-loader@1.1.2
 ### SCSS / SASS
 
 Add the SCSS/SASS loader and update the **webconfig.base.conf.js** in `build/webconfig.base.conf.js` 
-to allow for the pre-processing ([see](https://vue-loader.vuejs.org/guide/pre-processors.html#sass)...)
+to allow for the pre-processing ([from the guide...](https://vue-loader.vuejs.org/guide/pre-processors.html#sass)). 
+It also requires the removal of the line `scss: generateLoaders('sass'),` from 
+the `build/utils.js` file.
 
 ```bash
 
@@ -106,6 +108,34 @@ module.exports = {
   },
   // plugin omitted
 }
+
+```
+
+Now generate the `style.scss` file and add import it in the `main.js`:
+
+```bash
+
+$ mkdir -p assets/css
+$ touch assets/css/style.scss
+
+```
+
+Add `import '@/assets/css/style.scss'` to the `main.js` file:
+
+```javascript
+
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+
+// import css files
+import '@/assets/css/style.scss'
+
+Vue.config.productionTip = false
+
+// ... more code not shown
 
 ```
 
